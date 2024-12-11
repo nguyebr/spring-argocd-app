@@ -25,6 +25,7 @@ spec:
     metadata:
       labels:
         app: spring-argocd-app
+        app-temp: spring-argocd-app
         app.kubernetes.io/instance: spring-argocd-app
         app.kubernetes.io/name: spring-argocd-app
         app.kubernetes.io/version: v0.1.0
