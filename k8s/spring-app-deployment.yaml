@@ -25,10 +25,13 @@ spec:
     metadata:
       labels:
         app: spring-argocd-app
+        app.kubernetes.io/instance: spring-argocd-app
+        app.kubernetes.io/name: spring-argocd-app
+        app.kubernetes.io/version: v0.1.0
     spec:
       containers:
         - name: spring-argocd-app
-          image: mertcakmak2/spring-app
+          image: 874542566772.dkr.ecr.us-east-1.amazonaws.com/sample/spring-argocd-app:1.0
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
