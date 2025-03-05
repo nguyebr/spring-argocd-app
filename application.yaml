@@ -20,7 +20,7 @@ metadata:
   name: spring-k8s-argocd
   namespace: argocd
 spec:
-  project: default
+  project: spring-k8s-argocd
 
   source:
     repoURL: https://github.com/nguyebr/spring-argocd-app
@@ -28,7 +28,7 @@ spec:
     path: k8s
   destination:
     server: https://kubernetes.default.svc
-    namespace: spring-argocd-app
+    namespace: spring-k8s-argocd
 
   # source:
   #   repoURL: 123456789012.dkr.ecr.eu-central-1.amazonaws.com
