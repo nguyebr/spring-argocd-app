@@ -1,4 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: spring-k8s-argocd
+  namespace: argocd
+spec:
+  description: "Project for spring-k8s-argocd applications"
+  sourceRepos:
+    - "*"  # Adjust to limit to specific repos
+  destinations:
+    - server: "https://kubernetes.default.svc"
+      namespace: "*"
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+---
+apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: spring-k8s-argocd
