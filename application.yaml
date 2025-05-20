@@ -1,26 +1,41 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: spring-k8s-argocd
+  name: spring-app
   namespace: argocd
 spec:
-  description: "Project for spring-k8s-argocd applications"
+  description: "Project for spring-app applications"
   sourceRepos:
     - "*"  # Adjust to limit to specific repos
   destinations:
     - server: "https://kubernetes.default.svc"
-      namespace: "*"
+      namespace: "tenant-spring-app"
   clusterResourceWhitelist:
     - group: "*"
       kind: "*"
+  roles:
+    - name: spring-app-admin
+      description: Admins for spring-app
+      groups:
+        - tenant_spring-app_admin
+      policies:
+        - p, proj:spring-app:spring-app-admin, applications, *, *, allow
+  
+    - name: spring-app-viewer
+      description: Viewers for spring-app
+      groups:
+        - tenant_spring-app_viewer
+      policies:
+        - p, proj:spring-app:spring-app-viewer, applications, get, *, allow
+        - p, proj:spring-app:spring-app-viewer, applications, watch, *, allow         
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: spring-k8s-argocd
+  name: spring-app
   namespace: argocd
 spec:
-  project: spring-k8s-argocd
+  project: spring-app
 
   source:
     repoURL: https://github.com/nguyebr/spring-argocd-app
@@ -28,7 +43,7 @@ spec:
     path: k8s
   destination:
     server: https://kubernetes.default.svc
-    namespace: spring-k8s-argocd
+    namespace: tenant-spring-app
 
   # source:
   #   repoURL: 123456789012.dkr.ecr.eu-central-1.amazonaws.com

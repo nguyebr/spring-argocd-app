@@ -14,11 +14,11 @@ spec:
     path: k8s
   destination:
     server: https://kubernetes.default.svc
-    namespace: spring-argocd-app
+    namespace: tenant-spring-app
 
   syncPolicy:
     syncOptions:
-      - CreateNamespace=true
+      - CreateNamespace=false
 
     automated:
       selfHeal: true
